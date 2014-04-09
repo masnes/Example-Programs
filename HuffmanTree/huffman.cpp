@@ -57,12 +57,15 @@ int main () {
     // clock_gettime is a system dependent function
     // I'm commenting it out so that the code compiles for all systems
     // clock_gettime(CLOCK_REALTIME, &ts1);
+ 
     huff_node* h = huff_build(p);
     // attach keys to the huffman tree (and record the time)
     huff_add_keys(h, "");
+
     // clock_gettime is a system dependent function
     // I'm commenting it out so that the code compiles for all systems
     // clock_gettime(CLOCK_REALTIME, &ts2);
+
     // print the initial order of the priority queue again
     // This time the keys associated with each entry will
     // also be displayed
@@ -72,17 +75,21 @@ int main () {
     //huff_print(h, 10, 0);
     //huff_print(h, 10, 1);
     // now populate maps for huffman encoding and decoding
+
     // clock_gettime is a system dependent function
     // I'm commenting it out so that the code compiles for all systems
     // clock_gettime(CLOCK_REALTIME, &ts3);
+
     populate_huffman_maps(q);
     // now read these maps (for debugging purposes)
     //char_string_map_reader(huffman_encoding, "Huffman encoding");
     //string_char_map_reader(huffman_decoding, "Huffman decoding");
     encoding_string = huff_encoding_string(input_array);
+
     // clock_gettime is a system dependent function
     // I'm commenting it out so that the code compiles for all systems
     // clock_gettime(CLOCK_REALTIME, &ts4);
+
     cout << "The encoding string is: \n" << encoding_string << endl;
     cout << "The length of the encoding string is " << encoding_string.length() << " characters." << endl;
     cout <<  (ts4.tv_nsec - ts3.tv_nsec) << endl;
