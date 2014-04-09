@@ -4,8 +4,9 @@
 // these frequency values.
 //
 // This code written by Michael Asnes
-// (Partnered with Chris Wittenberg)
-// During: Feb, 2014 for CSCI3104, Algorithms
+// (Partnered with Chris Wittenberg for class problemset #5)
+// During: Feb, 2014 
+// For: CSCI3104, Algorithms
 #include <sys/time.h>
 #include "huffman.h"
 

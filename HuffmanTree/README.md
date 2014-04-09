@@ -5,7 +5,7 @@ these frequency values.
 
 This code written by Michael Asnes 
 
-(Partnered with Chris Wittenberg) 
+(Partnered with Chris Wittenberg for the class problemset #5) 
 
 During: Feb, 2014  
 

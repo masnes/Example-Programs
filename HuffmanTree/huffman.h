@@ -4,8 +4,9 @@
 // these frequency values.
 //
 // This code written by Michael Asnes
-// (Partnered with Chris Wittenberg)
+// (Partnered with Chris Wittenberg for class problemset #5)
 // During: Feb, 2014
+// For: CSCI3104, Algorithms
 #ifndef __huffman__
 #define __huffman__
 
