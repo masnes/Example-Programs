@@ -25,9 +25,6 @@ map<string,char> huffman_decoding;
 // global map to contain huffman encoding strings and their associated characters
 map<char,string> huffman_encoding;
 
-// counter for hufmman operations
-int huff_op_counter = 0;
-
 int main () {
     // for recodring the time that the huffman encoding functions take
     timespec ts1, ts2, ts3, ts4;
@@ -163,7 +160,6 @@ huff_node* huff_build(pq* &queue) {
         if (node1 == NULL && node2 == NULL) {
             cout << "Error! the pq was empty when the huffman tree was initialized! " << endl;
             return NULL;
-            huff_op_counter++;
         }
         //  node 1 has info, node 2 is null
         //  only 1 node left in tree
@@ -199,7 +195,6 @@ huff_node* huff_build(pq* &queue) {
 huff_node* huff_add_keys(huff_node* &node, string recursion_string) {
     if (node == NULL)
         return NULL;
-    huff_op_counter++;
     node->key = recursion_string;
     // the append method will alter the string permanently
     // so using 2 strings to avoid excess numbers being appened
@@ -213,7 +208,6 @@ huff_node* huff_add_keys(huff_node* &node, string recursion_string) {
 }
 
 void huff_print_recurse(huff_node* &huffnode, int maxdepth, bool leafs_only) {
-    huff_op_counter++;
     if (huffnode == NULL)
         return;
     if (maxdepth == 0)
@@ -417,7 +411,6 @@ pq* pq_populate() {
 
     map<char,int>::iterator it;
     for (map<char,int>::iterator it=character_frequency.begin(); it!=character_frequency.end(); ++it) {
-        huff_op_counter++;
         // convert map char to string
         string map_string(1, it->first);
         // instert nour
@@ -571,7 +564,6 @@ void populate_huffman_maps(pq* &queue) {
         if (p->huffnode == NULL)
             cout << "pq_print() ERROR: pq* node->huffnode null! priority of pq node is: " <<  p->priority << endl;
         else {
-            huff_op_counter++;
             string text = p->huffnode->text;
             if (p->huffnode->text.length() > 1)
                 cout << "Error: huffnode had a string longer than one character" << endl;
