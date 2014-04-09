@@ -147,18 +147,6 @@ string huff_decoding_string(string encoding_string) {
 }
 
 
-// code to initialize the priority queue
-// first node of the priority queue will be a
-// special initizizer that is never changed/removed
-// (this makings passing it's pointer around both easy and safe)
-pq* init_priority_queue() {
-    pq* p = new pq;
-    p->priority = INT_MIN;
-    p->next = NULL;
-    p->huffnode = NULL;
-    return p;
-}
-
 // remove 2 nodes from the  priority queue, make a
 // parent node with the  combined string and value of
 // these noes  link the nodes together in a parent->
@@ -272,57 +260,6 @@ void huff_print(huff_node* &huffnode, int maxdepth, bool leafs_only) {
     cout << endl;
 }
 
-
-
-// pq_insert an element into the correct place in the priority queue.
-// Citation: Michael Asnes, Christian O'Keef
-// modified version of previous 2013 work for
-// University of Colorado at Boulder class CSCI2270, Fall 2012
-pq* pq_insert(pq* &queue, int priority, huff_node* huffnode) {
-    pq* new_pq = new pq;
-    new_pq->priority = priority;
-    new_pq->next = NULL;
-    new_pq->huffnode = huffnode;
-
-    if (queue->next == NULL) {
-        queue->next = new_pq;
-        return 0;
-    }
-
-    pq* cursor = queue;
-    while (cursor->next != NULL && cursor->next->priority <= priority)
-        cursor = cursor->next;
-    new_pq->next = cursor->next;
-    cursor->next = new_pq;
-    return 0;
-
-}
-
-// Remove the highest priority element from the queue and return it.
-// Citation: Michael Asnes, Christian O'Keef
-// previous 2013 work for
-// University of Colorado at Boulder class CSCI2270, Fall 2012
-pq* pq_remove(pq* &queue) {
-    if (queue == NULL || queue->next == NULL)
-        return NULL;
-    else {
-        pq* pq_removed = queue->next;
-        queue->next = queue->next->next;
-        return pq_removed;
-    }
-}
-
-// Return the highest priority element from the queue without removing it.
-// Citation: Michael Asnes, Christian O'Keef
-// modified version of previous 2013 work for
-// University of Colorado at Boulder class CSCI2270, Fall 2012
-// (This function is not necessary, but potentially useful for debugging)
-pq* peek(pq* &queue) {
-    if(queue == NULL || queue->next == NULL)
-        return NULL;
-    else
-        return queue->next;
-}
 
 
 // This function reads the input file specified, currently set to:
@@ -457,6 +394,19 @@ void char_string_map_reader(map<char,string> readme, string map_name) {
     //return 0
     //}
 
+
+// code to initialize the priority queue
+// first node of the priority queue will be a
+// special initizizer that is never changed/removed
+// (this makings passing it's pointer around both easy and safe)
+pq* init_priority_queue() {
+    pq* p = new pq;
+    p->priority = INT_MIN;
+    p->next = NULL;
+    p->huffnode = NULL;
+    return p;
+}
+
     // populate a priority queue with the values in our map
     // this priority queue can then be used for the huffman pogram
 pq* pq_populate() {
@@ -490,6 +440,57 @@ pq* pq_duplicate(pq* node) {
     }
     return q;
 }
+
+// pq_insert an element into the correct place in the priority queue.
+// Citation: Michael Asnes, Christian O'Keef
+// modified version of previous 2013 work for
+// University of Colorado at Boulder class CSCI2270, Fall 2012
+pq* pq_insert(pq* &queue, int priority, huff_node* huffnode) {
+    pq* new_pq = new pq;
+    new_pq->priority = priority;
+    new_pq->next = NULL;
+    new_pq->huffnode = huffnode;
+
+    if (queue->next == NULL) {
+        queue->next = new_pq;
+        return 0;
+    }
+
+    pq* cursor = queue;
+    while (cursor->next != NULL && cursor->next->priority <= priority)
+        cursor = cursor->next;
+    new_pq->next = cursor->next;
+    cursor->next = new_pq;
+    return 0;
+
+}
+
+// Remove the highest priority element from the queue and return it.
+// Citation: Michael Asnes, Christian O'Keef
+// previous 2013 work for
+// University of Colorado at Boulder class CSCI2270, Fall 2012
+pq* pq_remove(pq* &queue) {
+    if (queue == NULL || queue->next == NULL)
+        return NULL;
+    else {
+        pq* pq_removed = queue->next;
+        queue->next = queue->next->next;
+        return pq_removed;
+    }
+}
+
+// Return the highest priority element from the queue without removing it.
+// Citation: Michael Asnes, Christian O'Keef
+// modified version of previous 2013 work for
+// University of Colorado at Boulder class CSCI2270, Fall 2012
+// (This function is not necessary, but potentially useful for debugging)
+pq* peek(pq* &queue) {
+    if(queue == NULL || queue->next == NULL)
+        return NULL;
+    else
+        return queue->next;
+}
+
 
 
 // print the priority queue for debugging purposes

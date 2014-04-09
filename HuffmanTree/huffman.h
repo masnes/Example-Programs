@@ -50,15 +50,11 @@ huff_node* link_huff_node(huff_node* &node, huff_node* parent, huff_node* leftCh
 // encode the character array into a string of huffman values;
 string huff_encoding_string(char* input_array);
 
-// initialize the priority queue
-pq* init_priority_queue();
-
 // remove 2 nodes from the  priority queue, make a
 // parent node with the  combined string and value of
 // these noes  link the nodes together in a parent->
 // children,  children->parent fashion. Insert parent
 // back into the  priority queue, then return the parent
-//
 huff_node* huff_build(pq* &queue);
 
 // add the key to all members of the huffman tree
@@ -76,14 +72,6 @@ void huff_print(huff_node* &huffnode, int maxdepth, bool leafs_only);
 // recursion function to enable huff_print()
 void huff_print_recurse(huff_node* &huffnode, int maxdepth, bool leafs_only);
 
-// insert an element to the priority queue
-pq* pq_insert(pq* &queue, int priority, huff_node* huffnode);
-
-// remove first element from the priority queue
-pq* pq_remove(pq* &queue);
-
-// view first element in the priority queue
-pq* pq_peek(pq* &queue);
 
 // This function reads the input file specified, currently set to:
 // csci3104_spring2014_ps5_data
@@ -105,6 +93,9 @@ void char_int_map_reader(map<char,int> readme, string map_name);
 void string_char_map_reader(map<string,char> readme, string map_name);
 void char_string_map_reader(map<char,string> readme, string map_name);
 
+// initialize the priority queue
+pq* init_priority_queue();
+
 // populate a priority queue with the values in our map
 // this priority queue can then be used for the huffman pogram
 pq* pq_populate();
@@ -112,8 +103,18 @@ pq* pq_populate();
 // duplicate a given priority queue
 pq* pq_duplicate(pq* node);
 
+// insert an element to the priority queue
+pq* pq_insert(pq* &queue, int priority, huff_node* huffnode);
+
+// remove first element from the priority queue
+pq* pq_remove(pq* &queue);
+
+// view first element in the priority queue
+pq* pq_peek(pq* &queue);
+
+void populate_huffman_maps(pq* &queue);
+
 // print the priority queue for debugging purposes
 void pq_print(pq* &queue);
 
-void populate_huffman_maps(pq* &queue);
 #endif
