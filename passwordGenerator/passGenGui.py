@@ -1,3 +1,7 @@
+# I'm thinking of building a gui implementation of the password generating
+# program
+# Until then, this is just a placeholder
+
 import sys
 import random
 
