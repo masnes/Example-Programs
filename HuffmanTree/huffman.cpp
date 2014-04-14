@@ -105,12 +105,13 @@ huff_node* init_huff_node(string text, int priority) {
     return init;
 }
 
-// code to link a huffman tree node (huff_node)
-// no links are built towards null values,
-// so passing NULL to an argument for this function will preserve
-// whatever value that argument corresponds to
-// e.g. if NULL is passed for leftChild, leftChild will
-// be preserved
+/* Code to link a huffman tree node (huff_node)
+ * no links are built towards null values,
+ * so passing NULL to an argument for this function will preserve
+ * whatever value that argument corresponds to
+ * e.g. if NULL is passed for leftChild, leftChild will
+ * be preserved */
+
 huff_node* link_huff_node(huff_node* &node, huff_node* parent, huff_node* leftChild, huff_node* rightChild) {
     if (node == NULL) {
         cout << "Error: Null node passed to link_huff_node linker function!" << endl;
@@ -125,8 +126,8 @@ huff_node* link_huff_node(huff_node* &node, huff_node* parent, huff_node* leftCh
     return node;
 }
 
-// encode the char array containing the input from our file
-// into a huffman coded string
+/* Encode the char array containing the input from our file
+ * into a huffman coded string */
 string huff_encoding_string(char* input_array) {
     int i = 0;
     string encoding_string = "";
@@ -144,12 +145,11 @@ string huff_decoding_string(string encoding_string) {
 }
 
 
-// remove 2 nodes from the  priority queue, make a
-// parent node with the  combined string and value of
-// these noes  link the nodes together in a parent->
-// children,  children->parent fashion. Insert parent
-// back into the  priority queue, then return the parent
-//
+/* Remove 2 nodes from the  priority queue, make a
+ * parent node with the  combined string and value of
+ * these noes  link the nodes together in a parent->
+ * children,  children->parent fashion. Insert parent
+ * back into the  priority queue, then return the parent */
 huff_node* huff_build(pq* &queue) {
     while (true) {
         // remove 2 nodes from tree
@@ -256,10 +256,10 @@ void huff_print(huff_node* &huffnode, int maxdepth, bool leafs_only) {
 
 
 
-// This function reads the input file specified, currently set to:
-// csci3104_spring2014_ps5_data
-// into a char array, then sends each character in the array to the
-// mapper function
+/* This function reads the input file specified, currently set to:
+ * csci3104_spring2014_ps5_data
+ * into a char array, then sends each character in the array to the
+ * mapper function */
 char * input_reader() {
     // take in file for reading
     ifstream in("csci3104_spring2014_PS5_data.txt");
@@ -320,10 +320,10 @@ void read_char_array(char* file_char_array) {
     cout << "\n" << endl;
 }
 
-// This function reads characters (given by the input_reader() function)
-// and places them into a global map. The map contains all
-// characters entered (besides '\n'), and the frequency of
-// the different string characters from the given filename
+/* This function reads characters (given by the input_reader() function)
+ * and places them into a global map. The map contains all
+ * characters entered (besides '\n'), and the frequency of
+ * the different string characters from the given filename */
 int mapper(char c) {
 
     if (character_frequency[c]){
@@ -337,23 +337,8 @@ int mapper(char c) {
     return -1;
 }
 
-// TODO: uncomment or remove this
-//// read char_int_map's contents
-//void char_int_map_reader() {
-    //    cout << "Mapped Values: " << endl;
-    //    map<char,int>::iterator it;
-    //    for (map<char,int>::iterator it=character_frequency.begin(); it!=character_frequency.end(); ++it)
-    //    {
-    //        if (it->first == '\n')
-    //            cout << "|\\n| => " << it->second << '\n';
-    //        else
-    //            cout << "|" << it->first << "|  => " << it->second << '\n';
-    //    }
-    //
-    //    cout << endl;
-    //}
 
-    // read the char_int_map's contents (for debugging purposes)
+/* Print contents of character map to stdout */
 void char_int_map_reader(map<char,int> readme, string map_name) {
     cout << "Mapped Values for " << map_name << ":" << endl;
     map<char,int>::iterator it;
@@ -389,10 +374,10 @@ void char_string_map_reader(map<char,string> readme, string map_name) {
     //}
 
 
-// code to initialize the priority queue
-// first node of the priority queue will be a
-// special initizizer that is never changed/removed
-// (this makings passing it's pointer around both easy and safe)
+/* Code to initialize the priority queue
+ * first node of the priority queue will be a
+ * special initizizer that is never changed/removed
+ * (this makings passing it's pointer around both easy and safe) */
 pq* init_priority_queue() {
     pq* p = new pq;
     p->priority = INT_MIN;
@@ -434,10 +419,10 @@ pq* pq_duplicate(pq* node) {
     return q;
 }
 
-// pq_insert an element into the correct place in the priority queue.
-// Citation: Michael Asnes, Christian O'Keef
-// modified version of previous 2013 work for
-// University of Colorado at Boulder class CSCI2270, Fall 2012
+/* Pq_insert an element into the correct place in the priority queue.
+ * Citation: Michael Asnes, Christian O'Keef
+ * modified version of previous 2013 work for
+ * University of Colorado at Boulder class CSCI2270, Fall 2012 */
 pq* pq_insert(pq* &queue, int priority, huff_node* huffnode) {
     pq* new_pq = new pq;
     new_pq->priority = priority;
@@ -458,10 +443,10 @@ pq* pq_insert(pq* &queue, int priority, huff_node* huffnode) {
 
 }
 
-// Remove the highest priority element from the queue and return it.
-// Citation: Michael Asnes, Christian O'Keef
-// previous 2013 work for
-// University of Colorado at Boulder class CSCI2270, Fall 2012
+/* Remove the highest priority element from the queue and return it.
+ * Citation: Michael Asnes, Christian O'Keef
+ * previous 2013 work for
+ * University of Colorado at Boulder class CSCI2270, Fall 2012 */
 pq* pq_remove(pq* &queue) {
     if (queue == NULL || queue->next == NULL)
         return NULL;
@@ -472,11 +457,11 @@ pq* pq_remove(pq* &queue) {
     }
 }
 
-// Return the highest priority element from the queue without removing it.
-// Citation: Michael Asnes, Christian O'Keef
-// modified version of previous 2013 work for
-// University of Colorado at Boulder class CSCI2270, Fall 2012
-// (This function is not necessary, but potentially useful for debugging)
+/* Return the highest priority element from the queue without removing it.
+ * Citation: Michael Asnes, Christian O'Keef
+ * modified version of previous 2013 work for
+ * University of Colorado at Boulder class CSCI2270, Fall 2012
+ * (This function is not necessary, but potentially useful for debugging) */
 pq* peek(pq* &queue) {
     if(queue == NULL || queue->next == NULL)
         return NULL;
@@ -486,7 +471,7 @@ pq* peek(pq* &queue) {
 
 
 
-// print the priority queue for debugging purposes
+/* Print the priority queue for debugging purposes */
 void pq_print(pq* &queue) {
     pq* p = queue;
 
@@ -531,7 +516,7 @@ void pq_print(pq* &queue) {
     cout << endl;
 }
 
-// move through the priority queue, populating both the encoding huffman map, and the decoding huffman map (huffman_encoding and huffman_decoding).
+/* Move through the priority queue, populating both the encoding huffman map, and the decoding huffman map (huffman_encoding and huffman_decoding).  */
 void populate_huffman_maps(pq* &queue) {
     pq* p = queue;
 
