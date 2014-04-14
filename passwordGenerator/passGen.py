@@ -1,3 +1,13 @@
+# This program is designed to read a text file of common passwords
+# and subsequently build a passphrase to user specifications
+# It can be run as is (python passGen.py), or
+# with optional arguments [number of words], [selection from wordlist]
+
+# ex: python passGen.py 3 20000
+# creates a passphrase of 3 words, randomly selecting from the
+# first 20,000 words on the wordlist
+
+# This code written by Michael Asnes
 import sys
 import random
 
