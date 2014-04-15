@@ -14,7 +14,7 @@ import random
 
 def setRandom():
     try:
-        rnd = random.SystemRandom
+        rnd = random.SystemRandom()
     except AttributeError:
         sys.stderr.write("WARNING: Your system does not currently support "
                          "cryptographically secure random number generation. "
@@ -22,13 +22,12 @@ def setRandom():
                          "If you are using python version 2.4 or earlier "
                          "you may be able to fix this by updating to a newer "
                          "version of python.")
-        rnd = random.Random
+        rnd = random.Random()
     return rnd
 
 
 def passphrase(wordRange, numWords):
-    rnd = setRandom
-    rnd.seed()
+    rnd = setRandom()
     f = open("wordlist-basic.txt")
     lines = f.readlines()
     passphrase = ""
