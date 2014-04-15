@@ -60,10 +60,10 @@ def passphrase(wordRange, numWords):
         print "You probably want a password with an entropy of at least 35"
         print ("Increase the number of words, or select from a larger portion "
                "of words to increase the entropy")
-    elif entropyRating < 45:
+    elif entropyRating < 44:
         print "An entropy rating of at least 35 is probably ok for most uses"
     else:
-        print "An entropy rating of 45 or more is excellent!"
+        print "An entropy rating of 44 or more is excellent!"
 
 
 if len(sys.argv) == 2:
@@ -72,9 +72,9 @@ if len(sys.argv) == 2:
 elif len(sys.argv) == 3:
     numWords = int(sys.argv[1])
     wordRange = int(sys.argv[2])
-    if wordRange >= 245000:
+    if wordRange >= 235000:
         print ("Error, too large of a range, please enter a number less than "
-               "245,000")
+               "235,000")
     elif wordRange < 1:
         print ("Error, too small of a range, please enter a number of at "
                "least 1")
