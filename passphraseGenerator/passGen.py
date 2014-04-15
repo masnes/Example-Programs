@@ -12,8 +12,23 @@ import sys
 import random
 
 
+def setRandom():
+    try:
+        rnd = random.SystemRandom
+    except AttributeError:
+        sys.stderr.write("WARNING: Your system does not currently support "
+                         "cryptographically secure random number generation. "
+                         "Generated passwords may not be secure.\n"
+                         "If you are using python version 2.4 or earlier "
+                         "you may be able to fix this by updating to a newer "
+                         "version of python.")
+        rnd = random.Random
+    return rnd
+
+
 def passphrase(wordRange, numWords):
-    random.seed()
+    rnd = setRandom
+    rnd.seed()
     f = open("wordlist-basic.txt")
     lines = f.readlines()
     passphrase = ""
@@ -22,7 +37,7 @@ def passphrase(wordRange, numWords):
 
     for i in range(numWords):
         ratingforWords *= wordRange
-        num = random.randint(1, wordRange)
+        num = rnd.randint(1, wordRange)
         passphrase += lines[num].strip()
         if i < numWords:
             passphrase += " "
@@ -44,7 +59,8 @@ def passphrase(wordRange, numWords):
 
     if entropyRating < 35:
         print "You probably want a password with an entropy of at least 35"
-        print "Increase the number of words, or select from a larger portion of words to increase the entropy"
+        print ("Increase the number of words, or select from a larger portion "
+               "of words to increase the entropy")
     elif entropyRating < 45:
         print "An entropy rating of at least 35 is probably ok for most uses"
     else:
@@ -58,9 +74,11 @@ elif len(sys.argv) == 3:
     numWords = int(sys.argv[1])
     wordRange = int(sys.argv[2])
     if wordRange >= 245000:
-        print "Error, too large of a range, please enter a number less than 245,000"
+        print ("Error, too large of a range, please enter a number less than "
+               "245,000")
     elif wordRange < 1:
-        print "Error, too small of a range, please enter a number of at least 1"
+        print ("Error, too small of a range, please enter a number of at "
+               "least 1")
     else:
         passphrase(wordRange, numWords)
 else:
