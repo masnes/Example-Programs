@@ -68,7 +68,7 @@ def passphrase(wordRange, numWords):
 
 if len(sys.argv) == 2:
     numWords = int(sys.argv[1])
-    passphrase(2000, numWords)
+    passphrase(4000, numWords)
 elif len(sys.argv) == 3:
     numWords = int(sys.argv[1])
     wordRange = int(sys.argv[2])
@@ -81,4 +81,4 @@ elif len(sys.argv) == 3:
     else:
         passphrase(wordRange, numWords)
 else:
-    passphrase(2000, 4)
+    passphrase(4000, 4)
