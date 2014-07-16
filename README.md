@@ -1,1 +1,2 @@
-This is a repository for showing off programs that I build and like. 
+Some old example code of mine. I'm planning to put my newer, fresher stuff
+in it's own repositories.
